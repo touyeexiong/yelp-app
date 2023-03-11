@@ -3,10 +3,21 @@ require("dotenv").config();
 
 const app = express();
 
-app.get("/getRestaurants", (req, res) => {
-    console.log('get all restaurants');
-    
-})
+// get all restaurants
+app.get("/api/v1/restaurants", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      restaurant: ["McDonalds", "Wendys"],
+    },
+  });
+});
+
+// get individual restaurants
+app.get("/api/v1/restaurants/:restaurantid", (req, res) => {
+  console.log(req.params);
+});
+
 //http://localhost:
 
 const port = process.env.PORT || 3005;
