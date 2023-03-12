@@ -13,6 +13,13 @@ app.get("/api/v1/restaurants", (req, res) => {
   });
 });
 
+// Create a Restaurant
+
+app.post("/api/v1/restaurants", (req, res) => {
+    console.log(req);
+    
+}
+
 // get individual restaurants
 app.get("/api/v1/restaurants/:restaurantid", (req, res) => {
   console.log(req.params);
