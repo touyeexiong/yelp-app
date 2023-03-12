@@ -1,15 +1,9 @@
 const express = require("express");
+const morgan = require("morgan");
 require("dotenv").config();
-
 const app = express();
 
-// middleware
-// middleware must be told explicitly to run to route handler
-// location of middleware matters
-app.use((req, res, next) => {
-  console.log("yeah our middleware ran");
-  next();
-});
+app.use(express.json())
 
 // get all restaurants
 app.get("/api/v1/restaurants", (req, res) => {
@@ -26,7 +20,7 @@ app.get("/api/v1/restaurants", (req, res) => {
 // Create a Restaurant
 
 app.post("/api/v1/restaurants", (req, res) => {
-  console.log(req);
+  console.log(req.body);
 });
 
 // get individual restaurants
