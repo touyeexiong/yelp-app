@@ -3,7 +3,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 // get all restaurants
 app.get("/api/v1/restaurants", (req, res) => {
@@ -26,14 +26,35 @@ app.post("/api/v1/restaurants", (req, res) => {
 // get individual restaurants
 app.get("/api/v1/restaurants/:id", (req, res) => {
   console.log(req.params);
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      restaurant: "mcdonalds",
+    },
+  });
 });
 
 // Update Restaurant
 
 app.put("/api/v1/restaurants/:id", (req, res) => {
-    console.log(req.params.id);
-    console.log(req.body);
-    
+  console.log(req.params.id);
+  console.log(req.body);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      restaurant: "mcdonalds",
+    },
+  });
+});
+
+// Delete Restaurant
+
+app.delete("/api/v1/restaurants/:id", (req, res) => {
+    res.status(204).json({
+        status: "success"
+    })
 })
 
 //http://localhost:
