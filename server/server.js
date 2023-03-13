@@ -24,9 +24,17 @@ app.post("/api/v1/restaurants", (req, res) => {
 });
 
 // get individual restaurants
-app.get("/api/v1/restaurants/:restaurantid", (req, res) => {
+app.get("/api/v1/restaurants/:id", (req, res) => {
   console.log(req.params);
 });
+
+// Update Restaurant
+
+app.put("/api/v1/restaurants/:id", (req, res) => {
+    console.log(req.params.id);
+    console.log(req.body);
+    
+})
 
 //http://localhost:
 
