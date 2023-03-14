@@ -1,20 +1,27 @@
 const express = require("express");
 const morgan = require("morgan");
 require("dotenv").config();
+
+const db = require("./db");
+
 const app = express();
 
 app.use(express.json());
 
 // get all restaurants
-app.get("/api/v1/restaurants", (req, res) => {
-  console.log("route handler ran");
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      restaurant: ["McDonalds", "Wendys"],
-    },
-  });
+app.get("/api/v1/restaurants", async (req, res) => {
+  try {
+    const results = await db.query("SELECT * from restaurants");
+    res.status(200).json({
+      status: "success",
+      results: results.rows.length,
+      data: {
+        restaurant: results.rows,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // Create a Restaurant
@@ -52,10 +59,10 @@ app.put("/api/v1/restaurants/:id", (req, res) => {
 // Delete Restaurant
 
 app.delete("/api/v1/restaurants/:id", (req, res) => {
-    res.status(204).json({
-        status: "success"
-    })
-})
+  res.status(204).json({
+    status: "success",
+  });
+});
 
 //http://localhost:
 
