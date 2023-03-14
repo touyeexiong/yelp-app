@@ -24,26 +24,32 @@ app.get("/api/v1/restaurants", async (req, res) => {
   }
 });
 
-// Create a Restaurant
+// get individual restaurants
+app.get("/api/v1/restaurants/:id", async (req, res) => {
+  console.log(req.params);
+  try {
+    id = req.params.id;
+    const results = await db.query(
+      `SELECT * from restaurants WHERE id = $1`, [id]
+    );
+    console.log(results.rows);
+    res.status(201).json({
+      status: "success",
+      data: {
+        restaurant: results.rows[0],
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
+// Create a Restaurant
 app.post("/api/v1/restaurants", (req, res) => {
   console.log(req.body);
 });
 
-// get individual restaurants
-app.get("/api/v1/restaurants/:id", (req, res) => {
-  console.log(req.params);
-
-  res.status(201).json({
-    status: "success",
-    data: {
-      restaurant: "mcdonalds",
-    },
-  });
-});
-
 // Update Restaurant
-
 app.put("/api/v1/restaurants/:id", (req, res) => {
   console.log(req.params.id);
   console.log(req.body);
