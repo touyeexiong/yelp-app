@@ -47,7 +47,7 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 // Create a Restaurant
 app.post("/api/v1/restaurants", async (req, res) => {
   console.log(req.body);
-
+// fixed breakage in postman. was sending body as text and not JSON. 
     try {
         const results = await db.query("INSERT INTO restaurants (name, location, price_range) values ($1, $2, $3)", [req.body.name, req.body.location, req.body.price_range] )
         console.log(results);
