@@ -47,26 +47,35 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 // Create a Restaurant
 app.post("/api/v1/restaurants", async (req, res) => {
   console.log(req.body);
-    try {
-        const results = await db.query("INSERT INTO restaurants (name, location, price_range) values ($1, $2, $3) returning *", [req.body.name, req.body.location, req.body.price_range] )
-        console.log(results.rows[0]);
-        
-        res.status(201).json({
-            status: "success",
-            data: {
-                restaurant: results.rows[0],
-            },
-          });
-    } catch (error) {
-        console.log(error);
-        
-    }
+  try {
+    const results = await db.query(
+      "INSERT INTO restaurants (name, location, price_range) values ($1, $2, $3) returning *",
+      [req.body.name, req.body.location, req.body.price_range]
+    );
+    console.log(results.rows[0]);
 
-
+    res.status(201).json({
+      status: "success",
+      data: {
+        restaurant: results.rows[0],
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // Update Restaurant
-app.put("/api/v1/restaurants/:id", (req, res) => {
+app.put("/api/v1/restaurants/:id", async (req, res) => {
+  try {
+    const results = await db.query(
+      "UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4",
+      [req.body.name, req.body.location, req.body.price_range, req.body.id]
+    );
+    console.log(results.rows[0]);
+    
+  } catch (error) {}
+
   console.log(req.params.id);
   console.log(req.body);
 
@@ -80,7 +89,16 @@ app.put("/api/v1/restaurants/:id", (req, res) => {
 
 // Delete Restaurant
 
-app.delete("/api/v1/restaurants/:id", (req, res) => {
+app.delete("/api/v1/restaurants/:id", async (req, res) => {
+  try {
+    const results = await db.query("DELETE from restaurants where id=$1 returning *", [
+      req.body.id,
+    ]);
+    console.log(results);
+    
+  } catch (error) {}
+    console.log(error);
+    
   res.status(204).json({
     status: "success",
   });
