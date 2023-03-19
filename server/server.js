@@ -76,7 +76,7 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
     res.status(200).json({
         status: "success",
         data: {
-          restaurant: "mcdonalds",
+          restaurant: results.rows[0],
         },
       });
   } catch (error) {
