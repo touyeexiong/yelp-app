@@ -74,39 +74,32 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
     );
     console.log(results);
     res.status(200).json({
-        status: "success",
-        data: {
-          restaurant: results.rows[0],
-        },
-      });
+      status: "success",
+      data: {
+        restaurant: results.rows[0],
+      },
+    });
   } catch (error) {
     console.log(error);
-    
   }
 
   console.log(req.params.id);
   console.log(req.body);
-
-
 });
 
 // Delete Restaurant
 
 app.delete("/api/v1/restaurants/:id", async (req, res) => {
   try {
-    const results = await db.query("DELETE from restaurants where id=$1 returning *", [
+    const results = await db.query("DELETE from restaurants where id=$1", [
       req.params.id,
     ]);
-    console.log(results);
-    
+    res.status(204).json({
+      status: "success",
+    });
   } catch (error) {
     console.log(error);
-
   }
-    
-  res.status(204).json({
-    status: "success",
-  });
 });
 
 //http://localhost:
