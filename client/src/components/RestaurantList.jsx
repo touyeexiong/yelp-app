@@ -2,13 +2,19 @@ import React, { useEffect } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder";
 
 const RestaurantList = () => {
-  useEffect(async () => {
-    try {
-      const response = await RestaurantFinder.get("/");
-      console.log(response);
-    } catch (error) {}
-  }, []);
-  // the array allows it to only run when it mounts, preventing an infinite loop
+
+    const getRestaurantList = async () =>{
+        try {
+            const response = await RestaurantFinder.get("/");
+            console.log(response);
+          } catch (error) {}
+          
+    }
+    useEffect(() => {
+        getRestaurantList();
+    }, []);
+    // the array allows it to only run when it mounts, preventing an infinite loop
+
 
   return (
     <div className="list-group">
