@@ -10,7 +10,6 @@ const Home = () => {
         <Header />
         <AddRestaurant />
         <RestaurantList />
-      Home
     </div>
   )
 }
