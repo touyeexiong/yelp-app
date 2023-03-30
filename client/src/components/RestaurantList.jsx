@@ -6,7 +6,7 @@ const RestaurantList = () => {
     const getRestaurantList = async () =>{
         try {
             const response = await RestaurantFinder.get("/");
-            console.log(response);
+            console.log(response.data.data.restaurants);
           } catch (error) {}
           
     }
