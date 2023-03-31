@@ -1,19 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder";
+import { RestaurantContext } from "../context/RestaurantsContext";
 
-const RestaurantList = () => {
+// const RestaurantList = () => {
 
-    const getRestaurantList = async () =>{
-        try {
-            const response = await RestaurantFinder.get("/");
-            console.log(response.data.data.restaurants);
-          } catch (error) {}
+//     const getRestaurantList = async () =>{
+//         try {
+//             const response = await RestaurantFinder.get("/");
+//             console.log(response.data.data.restaurants);
+//           } catch (error) {}
           
-    }
-    useEffect(() => {
-        getRestaurantList();
-    }, []);
+//     }
+//     useEffect(() => {
+//         getRestaurantList();
+//     }, []);
     // the array allows it to only run when it mounts, preventing an infinite loop
+const RestaurantList = (props) => {
+    const { restaurants, setRestaurants } = useContext(RestaurantContext);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await RestaurantFinder.get("/");
+                setRestaurants(response.data.data.restaurants);
+            } catch (error) {}
+        };
+
+        fetchData();
+    }, [])
 
 
   return (
