@@ -24,8 +24,8 @@ const RestaurantList = (props) => {
         setRestaurants(response.data.data.restaurants);
       } catch (error) {}
     };
-    console.log(restaurants);
     fetchData();
+    console.log(restaurants);
   }, []);
 
   return (
@@ -49,7 +49,7 @@ const RestaurantList = (props) => {
           {restaurants &&
             restaurants.map((restaurant) => {
               return (
-                <tr>
+                <tr key={restaurant.id}>
                   <td>{restaurant.name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
@@ -57,7 +57,9 @@ const RestaurantList = (props) => {
                   <td>
                     <button className="btn btn-warning">Update</button>
                   </td>
-                  <button className="btn btn-danger">Delete</button>
+                  <td>
+                    <button className="btn btn-danger">Delete</button>
+                  </td>
                 </tr>
               );
             })}
