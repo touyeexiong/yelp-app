@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder";
 import { RestaurantContext } from "../context/RestaurantsContext";
+import { useNavigate } from "react-router-dom";
 
 // const RestaurantList = () => {
 
@@ -17,6 +18,7 @@ import { RestaurantContext } from "../context/RestaurantsContext";
 // the array allows it to only run when it mounts, preventing an infinite loop
 const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,6 +40,10 @@ const RestaurantList = (props) => {
       );
     } catch (error) {}
   };
+
+  const handleUpdate = (id) => {
+    navigate(`/restaurants/${id}/update`)
+  }
 
   return (
     <div className="list-group">
@@ -66,7 +72,7 @@ const RestaurantList = (props) => {
                   <td>{"$".repeat(restaurant.price_range)}</td>
                   <td>reviews</td>
                   <td>
-                    <button className="btn btn-warning">Update</button>
+                    <button onClick={() => handleUpdate(restaurant.id)} className="btn btn-warning">Update</button>
                   </td>
                   <td>
                     <button
