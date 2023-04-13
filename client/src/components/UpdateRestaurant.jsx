@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RestaurantFinder from "../apis/RestaurantFinder";
 
 const UpdateRestaurant = (props) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
 
   useEffect(() => {
-    const fetchData = async() => {
-        const response = await RestaurantFinder.get(`/${id}`)
-        console.log(response.data.data);
-        setName(response.data.data.restaurant.name);
-        setLocation(response.data.data.restaurant.location);
-        setPriceRange(response.data.data.restaurant.price_range);
+    const fetchData = async () => {
+      const response = await RestaurantFinder.get(`/${id}`);
+      console.log(response.data.data);
+      setName(response.data.data.restaurant.name);
+      setLocation(response.data.data.restaurant.location);
+      setPriceRange(response.data.data.restaurant.price_range);
     };
 
     fetchData();
-  }, [])
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+      name,
+      location,
+      price_range: priceRange,
+    });
+    navigate("/");
+  };
 
   console.log(id);
   return (
@@ -54,7 +66,13 @@ const UpdateRestaurant = (props) => {
             type="number"
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button
+          onClick={handleSubmit}
+          type="submit"
+          className="btn btn-primary"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
