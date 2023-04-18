@@ -42,7 +42,11 @@ const RestaurantList = (props) => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/restaurants/${id}/update`)
+    navigate(`/restaurants/${id}/update`);
+  };
+
+  const handleRestaurantSelect = (id) => {
+    navigate(`/restaurants/${id}`)
   }
 
   return (
@@ -66,13 +70,21 @@ const RestaurantList = (props) => {
           {restaurants &&
             restaurants.map((restaurant) => {
               return (
-                <tr key={restaurant.id}>
+                <tr
+                  onClick={() => handleRestaurantSelect(restaurant.id)}
+                  key={restaurant.id}
+                >
                   <td>{restaurant.name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
                   <td>reviews</td>
                   <td>
-                    <button onClick={() => handleUpdate(restaurant.id)} className="btn btn-warning">Update</button>
+                    <button
+                      onClick={() => handleUpdate(restaurant.id)}
+                      className="btn btn-warning"
+                    >
+                      Update
+                    </button>
                   </td>
                   <td>
                     <button
