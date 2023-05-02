@@ -31,7 +31,7 @@ const RestaurantList = (props) => {
   }, []);
 
   const handleDelete = async (e, id) => {
-    e.stopPropagation()
+    e.stopPropagation();
     try {
       const response = await RestaurantFinder.delete(`/${id}`);
       setRestaurants(
@@ -43,13 +43,13 @@ const RestaurantList = (props) => {
   };
 
   const handleUpdate = (e, id) => {
-    e.stopPropagation()
+    e.stopPropagation();
     navigate(`/restaurants/${id}/update`);
   };
 
   const handleRestaurantSelect = (id) => {
-    navigate(`/restaurants/${id}`)
-  }
+    navigate(`/restaurants/${id}`);
+  };
 
   return (
     <div className="list-group">
