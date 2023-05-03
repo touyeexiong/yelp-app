@@ -22,6 +22,6 @@ const RestaurantDetailPage = () => {
     };
     fetchData();
   }, []);
-  return <div>{selectedRestaurant.name}</div>;
+  return <div>{selectedRestaurant && selectedRestaurant.name}</div>;
 };
 export default RestaurantDetailPage;
