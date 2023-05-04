@@ -8,7 +8,7 @@ const StarRating = ({ rating }) => {
     // } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
     //   stars.push(<i className="fa-solid fa-star-sharp-half-stroke"></i>);
     } else {
-      stars.push(<i class="fa-solid fa-star-sharp-half"></i>);
+      stars.push(<i className="fa-regular fa-star"></i>);
     }
   }
   return <>{stars}</>;
