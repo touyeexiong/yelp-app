@@ -23,6 +23,6 @@ const RestaurantDetailPage = () => {
     };
     fetchData();
   }, []);
-  return <div>{selectedRestaurant && <StarRating rating={3}/>}</div>;
+  return <div>{selectedRestaurant && <StarRating rating={4}/>}</div>;
 };
 export default RestaurantDetailPage;
