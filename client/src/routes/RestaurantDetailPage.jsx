@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantsContext";
 import RestaurantFinder from "../apis/RestaurantFinder";
 import StarRating from "../components/StarRating";
+import Reviews from "../components/Reviews";
 
 const RestaurantDetailPage = () => {
   const { id } = useParams();
@@ -11,18 +12,25 @@ const RestaurantDetailPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-
       try {
         const response = await RestaurantFinder.get(`/${id}`);
-        setSelectedRestaurant(response.data.data.restaurant)
+        setSelectedRestaurant(response.data.data.restaurant);
       } catch (error) {
         console.log(error);
       }
-
-
     };
     fetchData();
   }, []);
-  return <div>{selectedRestaurant && <StarRating rating={3.5}/>}</div>;
+  return (
+    <div>
+      {selectedRestaurant && (
+        <>
+          <div className="mt-3">
+            <Reviews />
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 export default RestaurantDetailPage;
