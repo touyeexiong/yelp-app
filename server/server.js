@@ -8,6 +8,13 @@ const app = express();
 
 app.use(express.json());
 
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // get all restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
   try {
@@ -18,7 +25,10 @@ app.get("/api/v1/restaurants", async (req, res) => {
       data: {
         restaurant: results.rows,
       },
-    });
+    })
+    console.log('we in get all restaurants', results.rows);
+    
+    ;
   } catch (error) {
     console.log(error);
   }
@@ -29,18 +39,19 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
   console.log(req.params);
   try {
     id = req.params.id;
-    const results = await db.query(`SELECT * from restaurants WHERE id = $1`, [
+    const restaurant = await db.query(`SELECT * from restaurants WHERE id = $1`, [
       id,
     ]);    
     id = req.params.id;
-    const results = await db.query(`SELECT * from restaurants WHERE id = $1`, [
+    const reviews = await db.query(`SELECT * from reviews WHERE id = $1`, [
       id,
     ]);
-    console.log(results.rows);
+    console.log(restaurant);
     res.status(201).json({
       status: "success",
       data: {
-        restaurant: results.rows[0],
+        restaurant: restaurant.rows[0],
+        reviews: reviews.rows
       },
     });
   } catch (error) {
