@@ -25,14 +25,7 @@ const RestaurantDetailPage = () => {
   }, []);
   return (
     <div>
-      {selectedRestaurant && (
-        <>
-          <div className="mt-3">
-            <Reviews />
-          </div>
-          <AddReview />
-        </>
-      )}
+      {selectedRestaurant && <StarRating rating={3}/>}
     </div>
   );
 };
