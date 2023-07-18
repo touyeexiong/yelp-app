@@ -30,6 +30,7 @@ const RestaurantDetailPage = () => {
         <div className="mt-3">
           <Reviews/>
         </div>
+        <AddReview />
         </>
       )}
     </div>
