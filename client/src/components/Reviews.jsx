@@ -19,6 +19,7 @@ const Reviews = ({reviews}) => {
           </div>
           <div className="card-body">
             <p className="card-text">This restaurant was awesome</p>
+            
           </div>
         </div>
         )
@@ -78,7 +79,7 @@ const Reviews = ({reviews}) => {
           <div className="card-body">
             <p className="card-text">This restaurant was awesome</p>
           </div>
-        </div> */}/
+        </div> */}
     </div>
   );
 };

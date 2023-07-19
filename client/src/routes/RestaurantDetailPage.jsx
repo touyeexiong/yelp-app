@@ -27,10 +27,12 @@ const RestaurantDetailPage = () => {
     <div>
       {selectedRestaurant && (
         <>
-        <div className="mt-3">
-          <Reviews reviews={selectedRestaurant.reviews} />
-        </div>
-        <AddReview />
+          <div className="mt-3">
+            <Reviews reviews={selectedRestaurant.reviews} />
+          </div>
+          <div>
+            <AddReview />
+          </div>
         </>
       )}
     </div>
