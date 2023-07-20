@@ -18,7 +18,7 @@ const Reviews = ({reviews}) => {
             </span>
           </div>
           <div className="card-body">
-            <p className="card-text">This restaurant was awesome</p>
+            <p className="card-text">{review.review}</p>
             
           </div>
         </div>
