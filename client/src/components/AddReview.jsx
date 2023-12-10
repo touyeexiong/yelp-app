@@ -6,7 +6,7 @@ const AddReview = () => {
   const { id } = useParams();
   const location = useLocation();
   console.log(location);
-  const history = useNavigate();
+  const navigate = useNavigate();
   console.log(id);
 
   const [name, setName] = useState("");
@@ -21,7 +21,8 @@ const AddReview = () => {
         review: reviewText,
         rating,
       });
-      
+      navigate(`/`);
+      navigate(`/restaurants/${id}`);
     } catch (error) {
       console.log(error);
     }
