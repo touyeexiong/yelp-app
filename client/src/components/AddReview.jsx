@@ -14,7 +14,7 @@ const AddReview = () => {
   const [rating, setRating] = useState("Rating");
 
   const handleSubmitReview = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const response = await RestaurantFinder.post(`/${id}/addReview`, {
         name,
@@ -23,6 +23,7 @@ const AddReview = () => {
       });
       navigate(`/`);
       navigate(`/restaurants/${id}`);
+      console.log('we should have navigated by now');
     } catch (error) {
       console.log(error);
     }
