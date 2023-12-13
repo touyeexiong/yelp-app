@@ -14,19 +14,24 @@ const AddReview = () => {
   const [rating, setRating] = useState("Rating");
 
   const handleSubmitReview = async (e) => {
-    // e.preventDefault();
-    try {
-      const response = await RestaurantFinder.post(`/${id}/addReview`, {
-        name,
-        review: reviewText,
-        rating,
-      });
-      navigate(`/`);
-      navigate(`/restaurants/${id}`);
-      console.log('we should have navigated by now');
-    } catch (error) {
-      console.log(error);
+    e.preventDefault();
+    if (rating === "Rating" || reviewText === "" || name === "" ){
+      alert("Missing information, please fill out the entire form")
+    } else {
+      try {
+        const response = await RestaurantFinder.post(`/${id}/addReview`, {
+          name,
+          review: reviewText,
+          rating,
+        });
+        navigate(`/`);
+        navigate(`/restaurants/${id}`);
+        console.log('we should have navigated by now');
+      } catch (error) {
+        console.log(error);
+      }
     }
+
 
   };
   return (
