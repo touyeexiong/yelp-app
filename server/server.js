@@ -18,7 +18,7 @@ app.all("*", function (req, res, next) {
 // get all restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
   try {
-    const results = await db.query("SELECT * from restaurants left join (select restaurant_id, COUNT(*), TRUNCI");
+    const results = await db.query("SELECT * from restaurants");
     res.status(200).json({
       status: "success",
       results: results.rows.length,
