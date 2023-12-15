@@ -18,21 +18,21 @@ app.all("*", function (req, res, next) {
 // get all restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
   try {
-    const results = await db.query("SELECT * from restaurants");
-    const restaurantRatingsData = await db.query*(
+    // const results = await db.query("SELECT * from restaurants");
+    const restaurantRatingsData = await db.query(
       "select * from restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
     );
-    console.log("results", results)
-    console.log("restaurant data", restaurantRatingsData);
+    // console.log("results", results)
+    // console.log("restaurant data", restaurantRatingsData);
     
     res.status(200).json({
       status: "success",
-      results: results.rows.length,
+      results: restaurantRatingsData.rows.length,
       data: {
-        restaurant: results.rows,
+        restaurant: restaurantRatingsData.rows
       },
     });
-    console.log("we in get all restaurants", results.rows);
+
   } catch (error) {
     console.log(error);
   }
