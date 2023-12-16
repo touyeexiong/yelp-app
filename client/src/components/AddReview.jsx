@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddReview = () => {
   const { id } = useParams();
-  const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
-  console.log(id);
+
 
   const [name, setName] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState("Rating");
+
+  const handleNavSubmit = () => {
+    navigate('/');
+  }
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
@@ -24,13 +26,16 @@ const AddReview = () => {
           review: reviewText,
           rating,
         });
-        navigate(`/`);
-        navigate(`/restaurants/${id}`);
+        window.location.reload(true);
+        // navigate(`/`);
+        // navigate(`/restaurants/${id}`);
         console.log('we should have navigated by now');
       } catch (error) {
         console.log(error);
       }
     }
+
+
 
 
   };
@@ -78,6 +83,7 @@ const AddReview = () => {
           ></textarea>
         </div>
         <button type="submit" onClick={handleSubmitReview} className="btn btn-primary">Submit</button>
+        {/* <button type="submit" onClick={handleNavSubmit}>Handle Nav</button> */}
       </form>
     </div>
   );
