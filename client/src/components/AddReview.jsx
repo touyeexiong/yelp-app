@@ -5,20 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 const AddReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-
   const [name, setName] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState("Rating");
 
-  const handleNavSubmit = () => {
-    navigate('/');
-  }
-
   const handleSubmitReview = async (e) => {
     e.preventDefault();
-    if (rating === "Rating" || reviewText === "" || name === "" ){
-      alert("Missing information, please fill out the entire form")
+    if (rating === "Rating" || reviewText === "" || name === "") {
+      alert("Missing information, please fill out the entire form");
     } else {
       try {
         const response = await RestaurantFinder.post(`/${id}/addReview`, {
@@ -27,17 +21,10 @@ const AddReview = () => {
           rating,
         });
         window.location.reload(true);
-        // navigate(`/`);
-        // navigate(`/restaurants/${id}`);
-        console.log('we should have navigated by now');
       } catch (error) {
         console.log(error);
       }
     }
-
-
-
-
   };
   return (
     <div className="mb-2">
@@ -69,7 +56,7 @@ const AddReview = () => {
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-          </div>    
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="Review">Review</label>
@@ -82,8 +69,13 @@ const AddReview = () => {
             className="form-control"
           ></textarea>
         </div>
-        <button type="submit" onClick={handleSubmitReview} className="btn btn-primary">Submit</button>
-        {/* <button type="submit" onClick={handleNavSubmit}>Handle Nav</button> */}
+        <button
+          type="submit"
+          onClick={handleSubmitReview}
+          className="btn btn-primary"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -4,19 +4,6 @@ import { RestaurantContext } from "../context/RestaurantsContext";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
 
-// const RestaurantList = () => {
-
-//     const getRestaurantList = async () =>{
-//         try {
-//             const response = await RestaurantFinder.get("/");
-//             console.log(response.data.data.restaurants);
-//           } catch (error) {}
-
-//     }
-//     useEffect(() => {
-//         getRestaurantList();
-//     }, []);
-// the array allows it to only run when it mounts, preventing an infinite loop
 const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
   const navigate = useNavigate();
@@ -24,13 +11,11 @@ const RestaurantList = (props) => {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get("/");
-        console.log(response.data.data);
         setRestaurants(response.data.data.restaurant);
         console.log(response);
       } catch (error) {}
     };
     fetchData();
-    console.log(restaurants);
   }, []);
 
   const handleDelete = async (e, id) => {
@@ -55,14 +40,14 @@ const RestaurantList = (props) => {
   };
 
   const renderRating = (restaurant) => {
-    if(!restaurant.count) {
-      return <span className="text-warning">0 Reviews</span>
+    if (!restaurant.count) {
+      return <span className="text-warning">0 Reviews</span>;
     }
     return (
-    <>
-    <StarRating rating={restaurant.average_rating}/>
-    <span className="text warning ml-1">{restaurant.count}</span>
-    </>
+      <>
+        <StarRating rating={restaurant.average_rating} />
+        <span className="text warning ml-1">{restaurant.count}</span>
+      </>
     );
   };
 
