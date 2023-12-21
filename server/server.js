@@ -36,7 +36,6 @@ app.get("/api/v1/restaurants", async (req, res) => {
 
 // get individual restaurants
 app.get("/api/v1/restaurants/:id", async (req, res) => {
-  console.log(req.params);
   try {
     id = req.params.id;
     const restaurant = await db.query(
